@@ -1,9 +1,9 @@
 # nals_test
 ######################
-API CREATE
-url: http://localhost:9999/api/work
-method : POST
-Tham số ------ Mô tả ----                                 Bắt buột
+##API CREATE
+url: http://localhost:9999/api/work **
+method : POST**
+Tham số ------ Mô tả ----                                Bắt buột
 name         work name                                       Có
 start_date   Ngày bắt đầu                                    Có
 end_date     Ngày kết thúc                                   Có
