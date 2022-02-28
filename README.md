@@ -81,7 +81,7 @@
 |Tham số   | Mô tả                                                                     | Bắt buột
 | ---------|:-------------------------------------------------------------------------:| -------:|
 |sort_type |  Sắp xếp tăng, giảm (Chỉ chấp nhận ASC, DESC)                             |Không    |
-|sort_by   |  Sắp xếp theo trường(1:name / 2:starting date 3: ending date /4: status ) |Không    |
+|sort_by   |  Sắp xếp theo trường(1:name ,2:starting date ,3: ending date ,4: status ) |Không    |
 |page      |  Trang                                                                    |Không    |
 
 ### Example : 
