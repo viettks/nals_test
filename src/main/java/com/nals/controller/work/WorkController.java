@@ -212,10 +212,10 @@ public class WorkController {
     public ResponseEntity<?> showListWork(@RequestParam Map<String, Object> param){
         Map<String, Object> response = new HashMap<>();
         try {
-            return ResponseEntity.ok(workService.getListWork(param));
+            response.put("result", workService.getListWork(param));
+            return ResponseEntity.ok(response);
         }
         catch (Exception e) {
-            e.printStackTrace();
             response.put("message", "Server Error");
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
