@@ -1,0 +1,77 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nals.mybatis.mapper.WorkMapper">
+
+	<insert id="createWork">
+	    <selectKey resultType="String" order="AFTER" keyProperty="workId">
+            SELECT LAST_INSERT_ID() as workId
+        </selectKey>
+		INSERT INTO tb_work
+		(
+			 name
+			,start_date
+			,end_date
+			,status
+			,created_at
+			,updated_at
+		) VALUES 
+		(
+			 #{name}
+			,#{start_date}
+			,#{end_date}
+			,#{status}
+			,NOW()
+			,NOW()
+		)
+	</insert>
+
+	<select id="countWorkId" resultType="int">
+		SELECT COUNT(*)
+		FROM tb_work
+		WHERE work_id = #{work_id}
+	</select>
+
+	<update id="updateWork">
+		UPDATE tb_work
+		SET
+			 name       = #{name}
+			,start_date = #{start_date}
+			,end_date   = #{end_date}
+			,status     = #{status}
+			,updated_at = NOW()
+		WHERE work_id = #{work_id}
+	</update>
+
+	<delete id="removeWork">
+		DELETE FROM tb_work
+		WHERE work_id = #{work_id}
+	</delete>
+
+	<select id="getListWork" resultType="Map">
+		SELECT
+			 work_id
+			,name
+			,start_date
+			,end_date
+			,(
+			CASE status
+			  WHEN 1 THEN 'Planing'
+			  WHEN 2 THEN 'Doing'
+			  WHEN 3 THEN 'Complete'
+			END) AS status
+		FROM tb_work
+		<if test="sort_by == 1">
+			ORDER BY name ${sort_type}
+		</if>
+		<if test="sort_by == 2">
+			ORDER BY start_date ${sort_type}
+		</if>
+		<if test="sort_by == 3">
+			ORDER BY end_date ${sort_type}
+		</if>
+		<if test="sort_by == 4">
+			ORDER BY status ${sort_type}
+		</if>
+		LIMIT #{number_of_page} OFFSET #{page_offset}
+	</select>
+</mapper>
